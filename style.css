@@ -28,6 +28,17 @@ body.menu-open {
     border-radius: 4px;
     transition: all 0.3s ease;
 }
+#texto-escuro{
+ color: red;
+}
+
+.text-escuro{
+  color: #000;
+}
+.div-principal{
+    background-color: #ffffffa6;
+    border-radius: 5px;
+}
 
 .btn-primary:hover {
     background-color: #444444;
