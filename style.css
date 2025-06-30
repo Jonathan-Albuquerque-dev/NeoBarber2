@@ -32,14 +32,6 @@ body.menu-open {
  color: red;
 }
 
-.text-escuro{
-  color: #000;
-}
-.div-principal{
-    background-color: #ffffffa6;
-    border-radius: 5px;
-}
-
 .btn-primary:hover {
     background-color: #444444;
 }
@@ -124,6 +116,13 @@ body.menu-open {
         padding-left: 1rem;
         padding-right: 1rem;
     }
+    .text-escuro{
+  color: #000;
+}
+.div-principal{
+    background-color: #ffffffa6;
+    border-radius: 5px;
+}
 }
 
 .carousel-container {
