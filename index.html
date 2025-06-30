@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neo Barber - Estilo e Tradição</title>
+    <!-- Inclui Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Inclui a fonte Inter e Playfair Display do Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #EDE8DE; /* Cor de fundo principal (bege da logo) */
+            color: #2E2E2E; /* Cor de texto principal (preto da logo) */
+            overflow-x: hidden;
+        }
+        body.menu-open {
+            overflow: hidden;
+        }
+        .font-display {
+            font-family: 'Playfair Display', serif;
+        }
+        .bg-light-100 { background-color: #EDE8DE; }
+        .bg-light-200 { background-color: #F8F5EE; }
+        .text-accent { color: #2E2E2E; }
+        .border-accent { border-color: #2E2E2E; }
+        
+        .btn-primary {
+            background-color: #2E2E2E;
+            color: #FFFFFF;
+            padding: 0.8rem 2.5rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: #444444;
+        }
+        
+        .hero-overlay::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(237, 232, 222, 1) 0%, rgba(237, 232, 222, 0) 100%);
+        }
+
+        .plan-card {
+            background-color: #FFFFFF;
+            border: 1px solid #D3CDC1;
+            border-radius: 8px;
+            padding: 2.5rem 2rem;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s ease;
+            color: #2E2E2E;
+        }
+        .plan-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1), 0 8px 10px -6px rgba(0,0,0,0.1);
+        }
+        .plan-card.featured {
+             background-color: #2E2E2E;
+             color: #FFFFFF;
+             border-color: #2E2E2E;
+        }
+        .plan-card.featured .text-gold-featured {
+            color: #D4AF37;
+        }
+        .plan-card.featured .text-muted-featured {
+            color: #a0a0a0;
+        }
+         .plan-card.featured .btn-primary {
+            background-color: #EDE8DE;
+            color: #2E2E2E;
+        }
+         .plan-card.featured .btn-primary:hover {
+            background-color: #f8f5ee;
+            color: #2E2E2E;
+            box-shadow: none;
+        }
+        .plan-price {
+            font-size: 4rem;
+        }
+        .plan-benefits li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .plan-benefits svg {
+            margin-right: 0.75rem;
+            flex-shrink: 0;
+        }
+        .icon-check { color: #2E2E2E; }
+        .plan-card.featured .icon-check { color: #D4AF37; }
+        .icon-cross { color: #9ca3af; }
+        
+        .whatsapp-float {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 40px;
+            right: 40px;
+            background-color: #25d366;
+            color: #FFF;
+            border-radius: 50px;
+            box-shadow: 2px 2px 3px #999;
+            z-index: 100;
+            transition: transform 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+        }
+        
+        .section-padding {
+            padding-top: 8rem;
+            padding-bottom: 8rem;
+        }
+
+        @media (max-width: 767px) {
+            .whatsapp-float {
+                right: 20px;
+                bottom: 20px;
+            }
+            .section-padding {
+                padding-top: 6rem;
+                padding-bottom: 6rem;
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+        }
+        .carousel-container {
+            position: relative;
+        }
+        .carousel-track {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+        .carousel-slide {
+            flex: 0 0 100%;
+            padding: 0 0.5rem;
+            box-sizing: border-box;
+        }
+        @media (min-width: 768px) {
+            .carousel-slide {
+                flex-basis: calc(100% / 3);
+            }
+        }
+        .carousel-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(46, 46, 46, 0.7);
+            color: #FFFFFF;
+            border: none;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s;
+        }
+        .carousel-button:hover {
+            background-color: #2E2E2E;
+        }
+        .carousel-button.prev {
+            left: -15px;
+        }
+        .carousel-button.next {
+            right: -15px;
+        }
+        @media (min-width: 1024px) {
+            .carousel-button.prev {
+                left: -35px;
+            }
+            .carousel-button.next {
+                right: -35px;
+            }
+        }
+        .service-details {
+            list-style: none;
+            padding: 0;
+            margin-top: 1rem;
+            color: #555;
+        }
+        .service-details li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+        .service-details svg {
+            margin-right: 0.5rem;
+            flex-shrink: 0;
+            color: #2E2E2E;
+        }
+    </style>
+</head>
+<body class="bg-light-100 antialiased">
+
+    <!-- Cabeçalho -->
+    <header id="header" class="bg-light-200/80 backdrop-blur-sm py-4 fixed w-full z-40 top-0 transition-all duration-300 border-b border-gray-300/50">
+        <nav class="container mx-auto flex justify-between items-center px-6 lg:px-8">
+            <a href="#hero" class="text-center">
+                <div class="text-3xl font-display font-bold text-accent uppercase" style="line-height: 1;">Neo Barber</div>
+                <div class="text-xs text-accent uppercase tracking-widest font-sans">Men's Club</div>
+            </a>
+            <ul class="hidden md:flex items-center space-x-8 text-accent">
+                <li><a href="#about" class="nav-link hover:text-black transition duration-300">A Barbearia</a></li>
+                <li><a href="#services" class="nav-link hover:text-black transition duration-300">Serviços</a></li>
+                <li><a href="#gallery" class="nav-link hover:text-black transition duration-300">Galeria</a></li>
+                <li><a href="#subscription" class="nav-link hover:text-black transition duration-300">Planos</a></li>
+                <li><a href="#contact" class="nav-link hover:text-black transition duration-300">Contato</a></li>
+            </ul>
+            <a href="https://cashbarber.com.br/NEOBARBER" target="_blank" rel="noopener noreferrer" class="hidden md:inline-block btn-primary">Agendar Horário</a>
+            <button class="md:hidden focus:outline-none" id="mobile-menu-button">
+                <svg class="w-8 h-8 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Painel de Navegação Mobile -->
+    <div id="mobile-nav-overlay" class="fixed inset-0 bg-black bg-opacity-70 z-40 hidden transition-opacity duration-300"></div>
+    <div id="mobile-nav-panel" class="fixed top-0 left-0 h-full w-4/5 max-w-xs bg-light-200 z-50 transform -translate-x-full transition-transform duration-300 ease-in-out">
+        <div class="flex justify-between items-center p-6 border-b border-gray-300">
+            <span class="text-accent font-bold uppercase tracking-wider">Menu</span>
+            <button id="close-menu-button" class="text-gray-500 hover:text-accent">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+        </div>
+        <ul class="flex flex-col p-6 space-y-5 text-accent">
+            <li><a href="#about" class="nav-link mobile-link text-lg hover:text-black transition duration-300">A Barbearia</a></li>
+            <li><a href="#services" class="nav-link mobile-link text-lg hover:text-black transition duration-300">Serviços</a></li>
+            <li><a href="#gallery" class="nav-link mobile-link text-lg hover:text-black transition duration-300">Galeria</a></li>
+            <li><a href="#subscription" class="nav-link mobile-link text-lg hover:text-black transition duration-300">Planos</a></li>
+            <li><a href="#contact" class="nav-link mobile-link text-lg hover:text-black transition duration-300">Contato</a></li>
+            <li><a href="https://cashbarber.com.br/NEOBARBER" target="_blank" rel="noopener noreferrer" class="text-lg hover:text-black transition duration-300">Agendar</a></li>
+        </ul>
+        <div class="absolute bottom-0 left-0 w-full p-6 border-t border-gray-300">
+            <div class="flex justify-center space-x-6">
+                <a href="https://www.instagram.com/neobarberfortaleza/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="text-gray-500 hover:text-accent transition-colors"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.072-4.948-.072zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.162 6.162 6.162 6.162-2.759 6.162-6.162-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4s1.791-4 4-4 4 1.79 4 4-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
+                <a href="#contact" aria-label="Localização" class="nav-link text-gray-400 hover:text-accent transition-colors"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg></a>
+            </div>
+        </div>
+    </div>
+
+
+    <main>
+        <!-- Seção Hero -->
+        <section id="hero" class="relative h-screen flex items-center justify-center text-center px-4 overflow-hidden">
+            <div class="absolute inset-0 bg-cover bg-center bg-no-repeat hero-overlay" style="background-image: url('assets/img/fundo02.png');"></div>
+            <div class="relative z-10 text-accent p-6">
+                <h1 class="font-display text-5xl md:text-8xl font-bold uppercase tracking-wider">Tradição & Estilo</h1>
+                <p class="text-lg md:text-xl mt-4 mb-8 max-w-2xl mx-auto text-gray-800">Onde a arte da barbearia clássica encontra as tendências modernas.</p>
+                <a href="https://cashbarber.com.br/NEOBARBER" target="_blank" rel="noopener noreferrer" class="btn-primary">Agende seu horário</a>
+            </div>
+        </section>
+
+        <!-- Seção Sobre -->
+        <section id="about" class="section-padding bg-light-200">
+            <div class="container mx-auto grid md:grid-cols-2 gap-12 items-center px-6 lg:px-8">
+                <div class="relative w-full overflow-hidden rounded-lg shadow-lg" style="padding-top: 56.25%;">
+                    <iframe class="absolute top-0 left-0 w-full h-full" src="https://www.youtube.com/embed/HueapC-xd0o" title="Vídeo da Neo Barber" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                <div class="text-center md:text-left">
+                    <h2 class="font-display text-4xl md:text-5xl font-bold mb-6">Nossa <span class="text-accent">História</span></h2>
+                    <p class="text-gray-600 leading-relaxed mb-4">Fundada sob os pilares da tradição e da excelência, a Neo Barber é mais do que um lugar para cortar o cabelo e fazer a barba. É um refúgio para o homem moderno, um espaço onde a camaradagem e o bom estilo se encontram.</p>
+                    <p class="text-gray-600 leading-relaxed">Nossos barbeiros são artistas dedicados, mestres na arte da navalha e da tesoura, comprometidos em oferecer uma experiência única e um resultado impecável a cada visita.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção de Serviços -->
+        <section id="services" class="section-padding bg-light-100">
+            <div class="container mx-auto text-center px-6 lg:px-8">
+                <h2 class="font-display text-4xl md:text-5xl font-bold mb-12">Nossos <span class="text-accent">Serviços</span></h2>
+                <div id="services-carousel" class="relative carousel-container">
+                     <div class="overflow-hidden">
+                        <div class="carousel-track">
+                            <!-- Cards de Serviço serão inseridos aqui pelo JavaScript -->
+                        </div>
+                    </div>
+                    <button class="carousel-button prev">&lt;</button>
+                    <button class="carousel-button next">&gt;</button>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Seção da Galeria -->
+        <section id="gallery" class="section-padding bg-light-200">
+            <div class="container mx-auto text-center px-6 lg:px-8">
+                <h2 class="font-display text-4xl md:text-5xl font-bold mb-12">Nossa <span class="text-accent">Galeria</span></h2>
+                <div id="gallery-carousel" class="relative carousel-container">
+                    <div class="overflow-hidden">
+                        <div class="carousel-track">
+                            <!-- Imagens da Galeria serão inseridas aqui -->
+                        </div>
+                    </div>
+                    <button class="carousel-button prev">&lt;</button>
+                    <button class="carousel-button next">&gt;</button>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Seção de Assinatura NEO CLUB -->
+        <section id="subscription" class="section-padding bg-light-100">
+            <div class="container mx-auto text-center px-6 lg:px-8">
+                <h2 class="font-display text-4xl md:text-5xl font-bold mb-4">SEJA <span class="text-accent">NEO CLUB</span></h2>
+                <p class="text-gray-600 mb-12 max-w-2xl mx-auto">Cabelo e barba impecáveis sempre que precisar com nossos planos de assinatura.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                    
+                    <!-- Plano Corte -->
+                    <div class="plan-card">
+                        <h3 class="text-2xl font-bold mb-2 text-accent">NEO CLUB - CORTE</h3>
+                        <p class="mb-6 text-gray-500">Sempre que precisar, alinhado e elegante.</p>
+                        <div class="flex justify-center items-baseline mb-6 text-accent">
+                            <span class="font-display font-bold text-3xl mr-1">R$</span>
+                            <span class="font-display font-bold text-6xl">89</span>
+                            <span class="font-display font-bold text-3xl">,90</span>
+                            <span class="font-sans font-normal text-xl text-gray-500 ml-1">/mês</span>
+                        </div>
+                        <ul class="plan-benefits text-left mb-8 flex-grow">
+                            <li><svg class="w-5 h-5 icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Corte o cabelo quantas vezes quiser!</li>
+                            <li><svg class="w-5 h-5 icon-cross" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>Faça a barba quantas vezes quiser!</li>
+                            <li><svg class="w-5 h-5 icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Convidado VIP no mês do aniversário.</li>
+                            <li><svg class="w-5 h-5 icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Desconto em produtos e serviços.</li>
+                        </ul>
+                        <a href="https://cashbarber.com.br/NEOBARBER" target="_blank" rel="noopener noreferrer" class="btn-primary mt-auto">Assinar Agora</a>
+                    </div>
+                    
+                    <!-- Plano Barba -->
+                    <div class="plan-card">
+                        <h3 class="text-2xl font-bold mb-2 text-accent">NEO CLUB - BARBA</h3>
+                        <p class="mb-6 text-gray-500">Para manter a barba sempre impecável.</p>
+                        <div class="flex justify-center items-baseline mb-6 text-accent">
+                            <span class="font-display font-bold text-3xl mr-1">R$</span>
+                            <span class="font-display font-bold text-6xl">124</span>
+                            <span class="font-display font-bold text-3xl">,90</span>
+                            <span class="font-sans font-normal text-xl text-gray-500 ml-1">/mês</span>
+                        </div>
+                        <ul class="plan-benefits text-left mb-8 flex-grow">
+                           <li><svg class="w-5 h-5 icon-cross" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>Corte o cabelo quantas vezes quiser!</li>
+                            <li><svg class="w-5 h-5 icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Faça a barba quantas vezes quiser!</li>
+                            <li><svg class="w-5 h-5 icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Convidado VIP no mês do aniversário.</li>
+                            <li><svg class="w-5 h-5 icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Desconto em produtos e serviços.</li>
+                        </ul>
+                        <a href="https://cashbarber.com.br/NEOBARBER" target="_blank" rel="noopener noreferrer" class="btn-primary mt-auto">Assinar Agora</a>
+                    </div>
+                    
+                    <!-- Plano Corte + Barba -->
+                    <div class="plan-card">
+                        <h3 class="text-2xl font-bold mb-2 text-accent">NEO CLUB - CORTE + BARBA</h3>
+                        <p class="mb-6 text-gray-500">O pacote completo para um visual perfeito.</p>
+                        <div class="flex justify-center items-baseline mb-6 text-accent">
+                            <span class="font-display font-bold text-3xl mr-1">R$</span>
+                            <span class="font-display font-bold text-6xl">179</span>
+                            <span class="font-display font-bold text-3xl">,90</span>
+                            <span class="font-sans font-normal text-xl text-gray-500 ml-1">/mês</span>
+                        </div>
+                        <ul class="plan-benefits text-left mb-8 flex-grow">
+                            <li><svg class="w-5 h-5 icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Corte o cabelo quantas vezes quiser!</li>
+                            <li><svg class="w-5 h-5 icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Faça a barba quantas vezes quiser!</li>
+                            <li><svg class="w-5 h-5 icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Convidado VIP no mês do aniversário.</li>
+                            <li><svg class="w-5 h-5 icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Desconto em produtos e serviços.</li>
+                        </ul>
+                        <a href="https://cashbarber.com.br/NEOBARBER" target="_blank" rel="noopener noreferrer" class="btn-primary mt-auto">Assinar Agora</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção de Contato e Localização -->
+        <section id="contact" class="section-padding bg-light-200">
+             <div class="container mx-auto grid md:grid-cols-2 gap-12 items-center">
+                <div class="flex flex-col items-center md:items-start text-center md:text-left">
+                    <h2 class="font-display text-4xl md:text-5xl font-bold mb-6">Nosso <span class="text-accent">Endereço</span></h2>
+                    <p class="text-lg text-gray-700 mb-4">Av. Santos Dumont, 3765 - Aldeota, Fortaleza - CE.</p>
+                    <p class="text-gray-600 mb-8 max-w-md">Estamos prontos para recebê-lo em um ambiente confortável e climatizado. Venha tomar um café conosco e renovar seu estilo.</p>
+                     <div class="flex flex-col sm:flex-row w-full justify-center md:justify-start space-y-4 sm:space-y-0 sm:space-x-4">
+                        <a href="https://wa.me/558591908022" target="_blank" rel="noopener noreferrer" class="btn-primary">WhatsApp</a>
+                        <a href="https://cashbarber.com.br/NEOBARBER" target="_blank" rel="noopener noreferrer" class="btn-primary" style="background-color: transparent; border: 2px solid #2E2E2E; color: #2E2E2E;">Agendar Online</a>
+                    </div>
+                </div>
+                 <div class="h-80 md:h-full w-full rounded-lg overflow-hidden shadow-lg">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3981.353399424844!2d-38.492306385739!3d-3.73884854448501!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7c7497a5a67f761%3A0xd94d5a4de2abfb02!2sNEO%20BARBER!5e0!3m2!1spt-BR!2sbr!4v1688000000000!5m2!1spt-BR!2sbr" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Rodapé -->
+    <footer class="bg-light-200 border-t border-gray-300 py-12">
+        <div class="container mx-auto text-center text-gray-600 px-6">
+            <a href="#hero" class="text-center inline-block mb-4">
+                <div class="text-3xl font-display font-bold text-accent uppercase" style="line-height: 1;">Neo Barber</div>
+                <div class="text-xs text-accent uppercase tracking-widest font-sans">Men's Club</div>
+            </a>
+             <div class="flex justify-center space-x-6 mb-8">
+                <a href="https://www.instagram.com/neobarberfortaleza/" target="_blank" rel="noopener noreferrer" class="hover:text-black transition-colors">Instagram</a>
+                <a href="#" class="hover:text-black transition-colors">Facebook</a>
+                <a href="https://wa.me/558591908022" target="_blank" rel="noopener noreferrer" class="hover:text-black transition-colors">WhatsApp</a>
+            </div>
+            <p>&copy; <span id="current-year"></span> Neo Barber. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+    
+    <!-- Botão Flutuante do WhatsApp -->
+    <a href="https://wa.me/558591908022" target="_blank" class="whatsapp-float" rel="noopener noreferrer" aria-label="Fale conosco pelo WhatsApp">
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 16 16">
+          <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"/>
+        </svg>
+    </a>
+
+    <!-- Script para interatividade -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileNavPanel = document.getElementById('mobile-nav-panel');
+            const mobileNavOverlay = document.getElementById('mobile-nav-overlay');
+            const closeMenuButton = document.getElementById('close-menu-button');
+
+            function openMenu() {
+                mobileNavPanel.classList.remove('-translate-x-full');
+                mobileNavOverlay.classList.remove('hidden');
+                document.body.classList.add('menu-open');
+            }
+
+            function closeMenu() {
+                mobileNavPanel.classList.add('-translate-x-full');
+                mobileNavOverlay.classList.add('hidden');
+                document.body.classList.remove('menu-open');
+            }
+            
+            mobileMenuButton.addEventListener('click', openMenu);
+            closeMenuButton.addEventListener('click', closeMenu);
+            mobileNavOverlay.addEventListener('click', closeMenu);
+            
+            document.querySelectorAll('.nav-link').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    closeMenu();
+                    if (this.getAttribute('href').startsWith('#')) {
+                        e.preventDefault();
+                        const targetId = this.getAttribute('href');
+                        const targetElement = document.querySelector(targetId);
+                        if (targetElement) {
+                            const headerOffset = document.getElementById('header').offsetHeight;
+                            const elementPosition = targetElement.getBoundingClientRect().top;
+                            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                            
+                            window.scrollTo({
+                                top: offsetPosition,
+                                behavior: 'smooth'
+                            });
+                        }
+                    }
+                });
+            });
+            
+            function setupCarousel(containerId, items, isService) {
+                const container = document.getElementById(containerId);
+                if (!container) return;
+
+                const track = container.querySelector('.carousel-track');
+                const prevBtn = container.querySelector('.carousel-button.prev');
+                const nextBtn = container.querySelector('.carousel-button.next');
+                if (!track || !prevBtn || !nextBtn) return;
+
+                track.innerHTML = '';
+                items.forEach(item => {
+                    const slide = document.createElement('div');
+                    slide.className = 'carousel-slide';
+                    if (isService) {
+                        slide.innerHTML = `
+                            <div class="bg-light-200 rounded-lg overflow-hidden group h-full flex flex-col p-6 text-center shadow-md">
+                                <div class="w-20 h-20 bg-light-100 rounded-full flex items-center justify-center mx-auto mb-4 border border-gray-300">
+                                    <svg class="w-10 h-10 text-accent" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="6" cy="6" r="3"></circle><circle cx="6" cy="18" r="3"></circle><line x1="20" y1="4" x2="8.12" y2="15.88"></line><line x1="14.47" y1="14.48" x2="20" y2="20"></line><line x1="8.12" y1="8.12" x2="12" y2="12"></line></svg>
+                                </div>
+                                <h3 class="text-xl font-bold mb-4 text-accent">${item.name}</h3>
+                                <ul class="service-details text-sm flex-grow text-left">
+                                    <li><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path></svg><span>Preço: ${item.price}</span></li>
+                                    <li><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.286 2.143L13 21l-2.286-6.857L5 12l5.286-2.143L13 3z"></path></svg><span>NEO CLUB: ${item.club ? 'Incluso no plano' : 'Consulte desconto'}</span></li>
+                                    <li><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg><span>Tempo aprox: ${item.time}</span></li>
+                                </ul>
+                            </div>`;
+                    } else {
+                         slide.innerHTML = `<img src="${item}" alt="Foto da galeria" class="w-full h-64 md:h-80 object-cover rounded-lg">`;
+                    }
+                    track.appendChild(slide);
+                });
+
+                let currentIndex = 0;
+                const totalSlides = items.length;
+                
+                function updateCarousel() {
+                    const slides = track.querySelectorAll('.carousel-slide');
+                    if (slides.length === 0) return;
+                    
+                    let itemsPerView = window.innerWidth >= 1024 ? 3 : (window.innerWidth >= 768 ? 2 : 1);
+                    
+                    const maxIndex = totalSlides - itemsPerView;
+                    if (currentIndex > maxIndex) currentIndex = 0;
+                    if (currentIndex < 0) currentIndex = totalSlides - 1;
+                    
+                    const slideWidth = slides[0].getBoundingClientRect().width;
+                    track.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
+                }
+                
+                nextBtn.addEventListener('click', () => {
+                    currentIndex++;
+                    updateCarousel();
+                });
+
+                prevBtn.addEventListener('click', () => {
+                    currentIndex--;
+                    updateCarousel();
+                });
+                
+                window.addEventListener('resize', updateCarousel);
+                updateCarousel(); // Initial call
+            }
+
+            const services = [
+                { name: 'Corte', price: 'R$ 50,00', club: true, time: '45 min' },
+                { name: 'Barba', price: 'R$ 50,00', club: true, time: '30 min' },
+                { name: 'Corte Infantil', price: 'R$ 55,00', club: false, time: '40 min' },
+                { name: 'Pai e Filho', price: 'R$ 95,00', club: false, time: '1h 20min' },
+                { name: 'Sobrancelha Navalhada', price: 'R$ 25,00', club: false, time: '15 min' },
+                { name: 'Sobrancelha Cera', price: 'R$ 35,00', club: false, time: '20 min' },
+                { name: 'Raspar (Máquina)', price: 'R$ 45,00', club: true, time: '25 min' },
+                { name: 'Raspar Cabeça (Navalha)', price: 'R$ 55,00', club: true, time: '35 min' },
+                { name: 'Pezinho (Cabelo)', price: 'R$ 40,00', club: false, time: '20 min' },
+                { name: 'Pezinho (Barba)', price: 'R$ 40,00', club: false, time: '20 min' },
+                { name: 'Penteado', price: 'R$ 35,00', club: false, time: '20 min' },
+                { name: 'Limpeza Orelha', price: 'R$ 30,00', club: false, time: '15 min' },
+                { name: 'Limpeza Nasal', price: 'R$ 30,00', club: false, time: '15 min' },
+                { name: 'Limpeza (Combo)', price: 'R$ 50,00', club: false, time: '25 min' },
+                { name: 'Hidratação Cabelo', price: 'A partir de R$ 40,00', club: false, time: '30 min' },
+                { name: 'Hidratação Barba', price: 'A partir de R$ 40,00', club: false, time: '25 min' },
+                { name: 'Alisamento Selagem + Corte', price: 'A partir de R$ 130,00', club: false, time: '1h 45min' },
+                { name: 'Alisamento Selagem', price: 'A partir de R$ 110,00', club: false, time: '1h 30min' },
+                { name: 'Alisamento Botox + Corte', price: 'A partir de R$ 120,00', club: false, time: '1h 40min' },
+                { name: 'Alisamento Botox', price: 'A partir de R$ 100,00', club: false, time: '1h 30min' },
+            ];
+            setupCarousel('services-carousel', services, true);
+
+            const galleryImages = [
+                'assets/img/foto01.png',
+                'assets/img/foto03.png',
+                'assets/img/foto04.png',
+                'assets/img/foto02.png',
+                'assets/img/foto05.png',
+                'assets/img/foto06.png'
+            ];
+            setupCarousel('gallery-carousel', galleryImages, false);
+
+            document.getElementById('current-year').textContent = new Date().getFullYear();
+        });
+    </script>
+
+</body>
+</html>
