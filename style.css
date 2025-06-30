@@ -35,6 +35,13 @@ body.menu-open {
 .btn-primary:hover {
     background-color: #444444;
 }
+.svg{
+    width: 30px;
+}
+.ajuste-svg{
+    gap:10px;
+    
+}
 
 .hero-overlay::after {
     content: '';
@@ -122,6 +129,14 @@ body.menu-open {
 .div-principal{
     background-color: #ffffffa6;
     border-radius: 5px;
+}
+.ajuste-svg{
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    display: inline-flex;
+    font-size: 14px;
+    gap: 5px;
 }
 }
 
