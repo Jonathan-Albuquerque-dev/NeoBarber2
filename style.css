@@ -138,6 +138,9 @@ body.menu-open {
     font-size: 14px;
     gap: 5px;
 }
+.respo{
+       height: 260px;
+    }
 }
 
 .carousel-container {
@@ -159,6 +162,7 @@ body.menu-open {
     .carousel-slide {
         flex-basis: calc(100% / 3);
     }
+    
 }
 
 .carousel-button {
