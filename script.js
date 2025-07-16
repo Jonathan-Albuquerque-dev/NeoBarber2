@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         slide.innerHTML = `
                             <div class="bg-light-200 rounded-lg overflow-hidden group h-full flex flex-col p-6 text-center shadow-md">
                                 <div class="w-20 h-20 bg-light-100 rounded-full flex items-center justify-center mx-auto mb-4 border border-gray-300">
-                                    <svg class="w-10 h-10 text-accent" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="6" cy="6" r="3"></circle><circle cx="6" cy="18" r="3"></circle><line x1="20" y1="4" x2="8.12" y2="15.88"></line><line x1="14.47" y1="14.48" x2="20" y2="20"></line><line x1="8.12" y1="8.12" x2="12" y2="12"></line></svg>
+                                    <img src="${item.icon}" alt="Foto da galeria" class="rounded-full">
                                 </div>
                                 <h3 class="text-xl font-bold mb-4 text-accent">${item.name}</h3>
                                 <ul class="service-details text-sm flex-grow text-left">
@@ -105,26 +105,26 @@ document.addEventListener('DOMContentLoaded', function () {
             }
 
             const services = [
-                { name: 'Corte', price: 'R$ 50,00', club: true, time: '45 min' },
-                { name: 'Barba', price: 'R$ 50,00', club: true, time: '30 min' },
-                { name: 'Corte Infantil', price: 'R$ 55,00', club: false, time: '40 min' },
-                { name: 'Pai e Filho', price: 'R$ 95,00', club: false, time: '1h 20min' },
-                { name: 'Sobrancelha Navalhada', price: 'R$ 25,00', club: false, time: '15 min' },
-                { name: 'Sobrancelha Cera', price: 'R$ 35,00', club: false, time: '20 min' },
-                { name: 'Raspar (Máquina)', price: 'R$ 45,00', club: true, time: '25 min' },
-                { name: 'Raspar Cabeça (Navalha)', price: 'R$ 55,00', club: true, time: '35 min' },
-                { name: 'Pezinho (Cabelo)', price: 'R$ 40,00', club: false, time: '20 min' },
-                { name: 'Pezinho (Barba)', price: 'R$ 40,00', club: false, time: '20 min' },
-                { name: 'Penteado', price: 'R$ 35,00', club: false, time: '20 min' },
-                { name: 'Limpeza Orelha', price: 'R$ 30,00', club: false, time: '15 min' },
-                { name: 'Limpeza Nasal', price: 'R$ 30,00', club: false, time: '15 min' },
-                { name: 'Limpeza (Combo)', price: 'R$ 50,00', club: false, time: '25 min' },
-                { name: 'Hidratação Cabelo', price: 'A partir de R$ 40,00', club: false, time: '30 min' },
-                { name: 'Hidratação Barba', price: 'A partir de R$ 40,00', club: false, time: '25 min' },
-                { name: 'Alisamento Selagem + Corte', price: 'A partir de R$ 130,00', club: false, time: '1h 45min' },
-                { name: 'Alisamento Selagem', price: 'A partir de R$ 110,00', club: false, time: '1h 30min' },
-                { name: 'Alisamento Botox + Corte', price: 'A partir de R$ 120,00', club: false, time: '1h 40min' },
-                { name: 'Alisamento Botox', price: 'A partir de R$ 100,00', club: false, time: '1h 30min' },
+                { name: 'Corte', price: 'R$ 60,00', club: true, time: '30 min',icon:'assets/img/corte.png' },
+                { name: 'Barba', price: 'R$ 60,00', club: true, time: '30 min',icon:'assets/img/barba.png' },
+                { name: 'Corte Infantil', price: 'R$ 55,00', club: false, time: '40 min',icon:'assets/img/corte infantil.png' },
+                { name: 'Pai e Filho', price: 'R$ 100,00', club: false, time: '1h 20min',icon:'assets/img/corte pai e filho.png' },
+                { name: 'Sobrancelha Navalhada', price: 'R$ 25,00', club: false, time: '15 min',icon:'assets/img/sobrancelha navalha.png' },
+                { name: 'Sobrancelha Cera', price: 'R$ 35,00', club: false, time: '20 min',icon:'assets/img/sobrancelha cera.png' },
+                { name: 'Raspar (Máquina)', price: 'R$ 45,00', club: true, time: '25 min',icon:'assets/img/raspar cabeça máquina.png' },
+                { name: 'Raspar Cabeça (Navalha)', price: 'R$ 55,00', club: true, time: '35 min',icon:'assets/img/raspar cabeça navalha.png' },
+                { name: 'Pezinho (Cabelo)', price: 'R$ 40,00', club: false, time: '20 min',icon:'assets/img/pezinho cabelo.png' },
+                { name: 'Pezinho (Barba)', price: 'R$ 40,00', club: false, time: '20 min',icon:'assets/img/pezinho barba.png' },
+                { name: 'Penteado', price: 'R$ 35,00', club: false, time: '20 min',icon:'assets/img/penteado.png' },
+                { name: 'Limpeza Orelha', price: 'R$ 30,00', club: false, time: '15 min',icon:'assets/img/limpeza orelha.png' },
+                { name: 'Limpeza Nasal', price: 'R$ 30,00', club: false, time: '15 min',icon:'assets/img/limpeza nariz.png' },
+                { name: 'Limpeza (Combo)', price: 'R$ 50,00', club: false, time: '25 min',icon:'assets/img/limpeza nariz + orelha.png' },
+                { name: 'Hidratação Cabelo', price: 'A partir de R$ 40,00', club: false, time: '30 min',icon:'assets/img/hidratação cabelo.png' },
+                { name: 'Hidratação Barba', price: 'A partir de R$ 40,00', club: false, time: '25 min',icon:'assets/img/hidratação barba.png' },
+                { name: 'Alisamento Selagem + Corte', price: 'A partir de R$ 130,00', club: false, time: '1h 45min',icon:'assets/img/alisamento selagem + corte.png' },
+                { name: 'Alisamento Selagem', price: 'A partir de R$ 110,00', club: false, time: '1h 30min',icon:'assets/img/17.png' },
+                { name: 'Alisamento Botox + Corte', price: 'A partir de R$ 130,00', club: false, time: '1h 40min',icon:'assets/img/20.png' },
+                { name: 'Alisamento Botox', price: 'A partir de R$ 100,00', club: false, time: '1h 30min',icon:'assets/img/19.png' },
             ];
             setupCarousel('services-carousel', services, true);
 
@@ -134,7 +134,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 'assets/img/foto04.png',
                 'assets/img/foto02.png',
                 'assets/img/foto05.png',
-                'assets/img/foto06.png'
+                'assets/img/foto06.png',
+                'assets/img/foto08.png',
+                'assets/img/foto09.png'
             ];
             setupCarousel('gallery-carousel', galleryImages, false);
 
