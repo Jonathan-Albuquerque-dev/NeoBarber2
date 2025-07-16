@@ -130,13 +130,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
             const galleryImages = [
                 'assets/img/foto01.png',
+                'assets/img/foto02.png',
                 'assets/img/foto03.png',
                 'assets/img/foto04.png',
-                'assets/img/foto02.png',
                 'assets/img/foto05.png',
                 'assets/img/foto06.png',
+                'assets/img/foto07.png',
                 'assets/img/foto08.png',
-                'assets/img/foto09.png'
+                'assets/img/foto09.png',
+                'assets/img/foto010.png',
+                'assets/img/foto011.png',
+                'assets/img/foto012.png',
             ];
             setupCarousel('gallery-carousel', galleryImages, false);
 
